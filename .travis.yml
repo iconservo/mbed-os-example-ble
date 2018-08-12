@@ -27,6 +27,7 @@ before_install:
   - rm -rf BLE_SM/ BLE_Thermometer/ BLE_Privacy/ BLE_HearRate/
   - mbed deploy
   - mbed-ci/travis_beforeinstall.sh
+  - pip install --user -r BLE_Button/mbed-os/requirements.txt
 
 script:
   - cd ${DEMO}
