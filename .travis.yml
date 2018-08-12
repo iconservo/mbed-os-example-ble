@@ -1,0 +1,34 @@
+language: cpp
+
+env:
+  global:
+    - TC_HOME=$HOME/tc
+
+matrix:
+  include:
+   - os: linux
+     env: ARMGCC_VERSION="6.3.1" BOARD=NRF52_DK DEMO=BLE_GattServer
+   - os: linux
+     env: ARMGCC_VERSION="6.3.1" BOARD=EMBIGGEN DEMO=BLE_GattServer
+   - os: linux
+     env: ARMGCC_VERSION="6.3.1" BOARD=NRF52_DK DEMO=BLE_Button
+   - os: linux
+     env: ARMGCC_VERSION="6.3.1" BOARD=EMBIGGEN DEMO=BLE_Button
+   - os: linux
+     env: ARMGCC_VERSION="6.3.1" BOARD=NRF52_DK DEMO=BLE_BatteryLevel
+   - os: linux
+     env: ARMGCC_VERSION="6.3.1" BOARD=EMBIGGEN DEMO=BLE_BatteryLevel
+
+before_install:
+  - pip install --user -U pip wheel
+  - pip install --user mbed-cli
+  - mbed deploy
+  - mbed-ci/travis_beforeinstall.sh
+
+script:
+  - cd ${DEMO}
+  - mbed compile -t GCC_ARM -m ${BOARD} --source=. --source=../mbed-embiggen-platform
+
+cache:
+  directories:
+    - ${TC_HOME}
