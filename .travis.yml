@@ -24,10 +24,10 @@ before_install:
   - cat ~/.netrc
   - pip install --user -U pip wheel
   - pip install --user mbed-cli
-  - rm -rf BLE_SM/ BLE_Thermometer/ BLE_Privacy/ BLE_HearRate/
+  - rm -rf BLE_SM/ BLE_Thermometer/ BLE_Privacy/ BLE_HeartRate/ BLE_GattClient/
   - mbed deploy
-  - mbed-ci/travis_beforeinstall.sh
   - pip install --user -r BLE_Button/mbed-os/requirements.txt
+  - mbed-ci/travis_beforeinstall.sh
 
 script:
   - cd ${DEMO}
