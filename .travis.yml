@@ -20,6 +20,7 @@ matrix:
      env: ARMGCC_VERSION="6.3.1" BOARD=EMBIGGEN DEMO=BLE_BatteryLevel
 
 before_install:
+  - echo -e "machine github.com\n  login $CI_USER_TOKEN" > ~/.netrc
   - pip install --user -U pip wheel
   - pip install --user mbed-cli
   - mbed deploy
